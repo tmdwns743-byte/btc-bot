@@ -1,0 +1,24 @@
+name: BTC Hourly Alert Bot
+
+on:
+  schedule:
+    # 매시간 정각(00분)마다 자동 실행 (UTC 기준)
+    - cron: '0 * * * *'
+  # 깃허브 웹 화면에서 버튼을 눌러 테스트 실행할 수도 있음
+  workflow_dispatch:
+
+jobs:
+  check-market:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 저장소 코드 가져오기
+        uses: actions/checkout@v4
+
+      - name: 파이썬 3.12 설치
+        uses: setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 비트코인 1시간봉 분석 및 텔레그램 전송
+        run: |
+          python check_once.py
