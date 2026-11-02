@@ -16,7 +16,7 @@ MIN_FVG_GAP_PERCENT = 1.0
 
 def send_telegram(message: str):
     """텔레그램 메시지 발송 함수"""
-    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+    url = f"https://data-api.binance.vision/api/v3/klines?symbol={SYMBOL}&interval={TIMEFRAME}&limit=100"
     payload = {
         "chat_id": TELEGRAM_CHAT_ID,
         "text": message,
@@ -34,7 +34,7 @@ def send_telegram(message: str):
 
 def get_binance_candles():
     """바이낸스에서 1시간봉 캔들 데이터 수집"""
-    url = f"https://api.binance.com/api/v3/klines?symbol={SYMBOL}&interval={TIMEFRAME}&limit=100"
+    url = f"https://data-api.binance.vision/api/v3/klines?symbol={SYMBOL}&interval={TIMEFRAME}&limit=100"
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
     try:
         with urllib.request.urlopen(req, timeout=10) as resp:
