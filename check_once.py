@@ -17,12 +17,20 @@ MIN_FVG_GAP_PERCENT = 1.0
 def send_telegram(message: str):
     """텔레그램 메시지 발송 함수"""
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+
+    payload = {
         "chat_id": TELEGRAM_CHAT_ID,
         "text": message,
         "parse_mode": "HTML"
     }
+
     data = json.dumps(payload).encode("utf-8")
-    req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"})
+    req = urllib.request.Request(
+        url,
+        data=data,
+        headers={"Content-Type": "application/json"}
+    )
+
     try:
         with urllib.request.urlopen(req, timeout=10) as resp:
             return resp.status == 200
