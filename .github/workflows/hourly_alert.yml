@@ -20,5 +20,7 @@ jobs:
           python-version: '3.12'
 
       - name: 비트코인 1시간봉 분석 및 텔레그램 전송
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
         run: |
-          python check_once.py
+          python check_once.pyy
