@@ -3,11 +3,10 @@ import urllib.parse
 import json
 import os
 from datetime import datetime
-
 # ==========================================
 # 텔레그램 설정
 # ==========================================
-TELEGRAM_TOKEN = "9154522261:AAGMLVAJcpkHguU4y5RNfngGNEzWejH6HXI"
+TELEGRAM_TOKEN = os.environ["TELEGRAM_TOKEN"]
 TELEGRAM_CHAT_ID = "8316332813"
 
 SYMBOL = "BTCUSDT"
@@ -17,8 +16,7 @@ MIN_FVG_GAP_PERCENT = 1.0
 
 def send_telegram(message: str):
     """텔레그램 메시지 발송 함수"""
-    url = f"https://data-api.binance.vision/api/v3/klines?symbol={SYMBOL}&interval={TIMEFRAME}&limit=100"
-    payload = {
+    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
         "chat_id": TELEGRAM_CHAT_ID,
         "text": message,
         "parse_mode": "HTML"
