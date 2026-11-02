@@ -23,4 +23,4 @@ jobs:
         env:
           TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
         run: |
-          python check_once.pyy
+          python check_once.py
